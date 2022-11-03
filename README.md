@@ -1,2 +1,29 @@
-# DebtSpecificRiskMethodology
+# Debt Specific Risk Methodology
+
 Debt specific risk arises when the price of a debt instrument moves out of line with similar instruments, due to principally factors related to its issuer. In general, debt specific risk is comprised of two components of credit risk: the event (rating migration risk) and default risk. 
+
+Therefore, a debt specific risk model can also be viewed as a credit risk model. However, to capture specific risk more appropriately, such models must also incorporate mechanisms to isolate specific risk from total risks that include general market risk as a component. Such a separation is necessary as banks often calculate general market risk in a separate model.
+
+There are two general types of models available that can be used to calculate debt specific risk: the rating-based and spread-based credit risk models. In this section, we briefly overview these two types of credit risk models, with a focus on the Credit VaR and Idiosyncratic Spread Risk (ISR) models, and explain how the new DSR model is related to these models.
+
+Rating-based credit risk models are popularized by JP Morgan’s CreditMetrics]. Rating-based models typically model the change of credit ratings (migration and defaults), which in turn affects the value of the portfolio and leads to quantification of risk due to both market-wide and issuer-specific events. 
+
+These models are closely related to structural models, which take Merton’s option theoretical approach that relates a firm’s capital structure to its credit status. While rating-based models capture credit risk due to downgrading and defaults, they ignores credit spread risk to which debt instruments such as corporate bonds are typically exposed (See https://finpricing.com/lib/FiZeroBond.html). For example, each credit rating is associated with an average credit spread, which is the currently observed forward spread. 
+
+The evolution of average credit spreads for different rating categories is therefore deterministic, and knowing the distribution of ratings at the end of a given risk horizon implies that one knows the distribution of portfolio values. Since credit spreads observed from market are significantly deviated from average credit spread for each rating class, and such spread deviations may be firm characteristic, assuming zero spread risk misses an important dimension of risk and may lead to significant underestimate of debt specific risk, especially for high rated debt instruments.
+
+Traditional rating-based models also have weaknesses in providing market responsive risk measures. Typically, they use an annual rating transition matrix as a main model parameter (which does not change on daily basis) and risks are calculated over a one-year horizon. As a result, these models do not fit well with trading practices and hence have difficulties in estimating credit risk in financial instruments that are actively traded and have daily changes in prices and volatilities.
+
+The DSR model improves rating-based models by directly modeling the changes of credit spreads. Through simulating credit spreads, rating migrations are covered by changes of credit spreads1 and defaults are generated when large credit spreads. If we apply the market-implied rating methodology, a credit spread can be uniquely associated with a market-implied rating. 
+
+In this sense, changes of credit spreads are equivalent to changes of market (exceeding certain cut-off values) are encountered. The model avoids the indirect simulation of credit rating changes in CreditMetrics through firm’s asset levels and hence has the advantage that more direct and timely available market data is used to predict defaults as well as changes in credit spreads over the risk horizon. 
+
+As a result, the DSR model can be viewed as a new rating-based model with infinite number of credit “ratings” (each credit spread level is viewed as a distinct rating), which are more granular than agency ratings and offers more responsive measures of perceived credit quality.
+
+The DSR model also provides a more accurate framework for measuring issuer specific risk in debt instruments. It uses a novel conditional distribution approach to separate specific risk from total spread risk, which includes general market risk arising from bond index movements. By conditioning on no changes on market bond indices, changes on credit spreads observed in simulation are attributed only to the changes on idiosyncratic spreads. Hence the model measures debt specific risk more accurately.
+
+We mention two other credit risk models that have appeared in the literature and are closely related to our DSR model. The rating-based model generalizes the CreditMetrics approach by incorporating credit spread risk, in addition to the risk of rating migration and default. This approach may lead to inconsistent results as the rating migration simulated using equity market information may be inconsistent with spread levels simulated using debt market information. 
+
+Moreover, it is assumed that rating transitions are independent of spread changes, which is unreasonable because a large upward move in spreads would probably imply a downgrade in credit rating. The CreditGrades model is another (structural) model that has been suggested to estimate issuer-specific risk in corporate bonds. However, the model focuses mainly on default risk. The credit spreads predicted by the model are more relevant to default swap levels, rather than credit spreads over government bonds, which may include risk premium and liquidity premium as components.
+
+The second type of models are spread-based models that explicitly model how credit spreads are moved. Credit risk is captured through changes of credit spreads. The Bank’s Idiosyncratic Spread Risk (ISR) model, which is currently used for the purpose of risk monitoring, is such a model. Another example of spread-based model is Barra’s global credit risk model, which is designed to provide forecasts of risk due to general market-wide spread changes as well as issuer-specific credit events.
